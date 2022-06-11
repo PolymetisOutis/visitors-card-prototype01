@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<title>来訪者カード</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+  <div class="container-fluid">
+    <form action="{% url 'test_app:confirm' %}" method="post">
+      {% csrf_token %}
+      <div class="row">
+        <img style="text-align: center" src="/media/logo.svg" width="70px" height="70px">
+        <h1 class="h1-title" style="text-align: center">来訪者カード</h1>
+        <h3 class="h3-title">来訪日時</h3>
+          <div class="col" style="padding: 0; padding-left: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label form-control">来訪日<span style="color: red;">*</span></div>
+              </div>
+              <input name="date" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+            </div>
+          </div>
+          <div class="col" style="padding: 0; padding-right: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label-time form-control">入室時刻<span style="color: red;">*</span></div>
+              </div>
+              <input name="time" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+            </div>
+          </div>
+          <h3 class="h3-title">来訪者</h3>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="theme-label form-control">会社名</div>
+            </div>
+            <input name="company_name" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+          </div>
+          <div class="col-8" style="padding: 0; padding-left: 12px;">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="theme-label form-control">お名前<span style="color: red;">*</span></div>
+            </div>
+            <input name="visitor_name" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+          </div>
+          </div>
+          <div class="col-4" style="padding: 0; padding-right: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
+              </div>
+              <input name="temperature" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="theme-label form-control">同行者　人数</div>
+            </div>
+            <select class="extraction">
+              <option value="0" selected>0名</option>
+              <option value="1">1名</option>
+              <option value="2">2名</option>
+              <option value="3">3名</option>
+            </select>
+          </div>
+        </div>
+        <div class="accompany1" style="display: none;">
+        <div class="row" style="padding: 0;">
+          <div class="col-8" style="padding: 0; padding-left: 12px;">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="theme-label form-control">お名前<span style="color: red;">*</span></div>
+            </div>
+            <input name="accompany1_name" type="text" class="form-control accompany1_name" placeholder="" aria-label="" aria-describedby="basic-addon1">
+          </div>
+          </div>
+          <div class="col-4" style="padding: 0; padding-right: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
+              </div>
+              <input name="accompany1_temp" type="text" class="form-control accompany1_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="accompany2" style="display: none;">
+          <div class="row" style="padding: 0;">
+          <div class="col-8" style="padding: 0; padding-left: 12px;">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="theme-label form-control">お名前<span style="color: red;">*</span></div>
+            </div>
+            <input name="accompany2_name" type="text" class="form-control accompany2_name" placeholder="" aria-label="" aria-describedby="basic-addon1">
+          </div>
+          </div>
+          <div class="col-4" style="padding: 0; padding-right: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
+              </div>
+              <input name="accompany2_temp" type="text" class="form-control accompany2_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="accompany3" style="display: none;">
+          <div class="row">
+          <div class="col-8" style="padding: 0; padding-left: 12px;">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="theme-label form-control">お名前<span style="color: red;">*</span></div>
+            </div>
+            <input name="accompany3_name" type="text" class="form-control accompany3_name" placeholder="" aria-label="" aria-describedby="basic-addon1">
+          </div>
+          </div>
+          <div class="col-4" style="padding: 0; padding-right: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
+              </div>
+              <input name="accompany3_temp" type="text" class="form-control accompany3_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
+            </div>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <h3 class="h3-title">訪問先</h3>
+          <div class="input-group">
+
+            <div class="input-group-prepend">
+              <div class="theme-label form-control">担当者</div>
+            </div>
+          
+
+            <div class="left-column">
+              <select name="position" style="width: 100%;" class="form-control">
+                <option selected>選択してください</option>
+                <option value="代表">代表</option>
+                <option value="役員">役員</option>
+                <option value="人事">人事</option>
+                <option value="営業">営業</option>
+                <option value="事務">事務</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+            <div class="right-column">
+            <input name="interviewer" type="text" style="width: 100%;" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="theme-label-textarea form-control" rows="5">ご用件</div>
+            </div>
+            <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+
+          <div>
+          <br>
+          </div>
+
+          <div class="row" style="padding-right: 1px; padding-left: 24px;">
+          <button type="submit" class="btn btn-primary btn-lg" style="background-color:rgb(135, 137, 6);" autofocus>確認画面へ</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(".extraction").change(function() {
+        var extraction_val = $(".extraction").val();
+        if(extraction_val == "0") {
+          $('.accompany1').css('display', 'none');
+          $('.accompany1_name').prop('required', false);
+          $('.accompany1_temp').prop('required', false);
+          $('.accompany2').css('display', 'none');
+          $('.accompany2_name').prop('required', false);
+          $('.accompany2_temp').prop('required', false);
+          $('.accompany3').css('display', 'none');
+          $('.accompany3_name').prop('required', false);
+          $('.accompany2_temp').prop('required', false);
+        }else if(extraction_val == "1") {
+          $('.accompany1').css('display', 'block');
+          $('.accompany1_name').prop('required', true);
+          $('.accompany1_temp').prop('required', true);
+          $('.accompany2').css('display', 'none');
+          $('.accompany2_name').prop('required', false);
+          $('.accompany2_temp').prop('required', false);
+          $('.accompany3').css('display', 'none');
+          $('.accompany3_name').prop('required', false);
+          $('.accompany2_temp').prop('required', false);
+        }else if(extraction_val == "2") {
+          $('.accompany1').css('display', 'block');
+          $('.accompany1_name').prop('required', true);
+          $('.accompany1_temp').prop('required', true);
+          $('.accompany2').css('display', 'block');
+          $('.accompany2_name').prop('required', true);
+          $('.accompany2_temp').prop('required', true);
+          $('.accompany3').css('display', 'none');
+          $('.accompany3_name').prop('required', false);
+          $('.accompany2_temp').prop('required', false);
+        }else if(extraction_val == "3") {
+          $('.accompany1').css('display', 'block');
+          $('.accompany1_name').prop('required', true);
+          $('.accompany1_temp').prop('required', true);
+          $('.accompany2').css('display', 'block');
+          $('.accompany2_name').prop('required', true);
+          $('.accompany2_temp').prop('required', true);
+          $('.accompany3').css('display', 'block');
+          $('.accompany3_name').prop('required', true);
+          $('.accompany2_temp').prop('required', true);
+        }
+      });
+    </script>
+</body>
+</html>

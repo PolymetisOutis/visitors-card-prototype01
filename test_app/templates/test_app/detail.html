@@ -1,0 +1,256 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+    <title>INDEX</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <div class="row">
+            {% comment %} <div>
+            {{msg}}<br><br>
+            </div> {% endcomment %}
+            <h3>来訪日時</h3>
+            {% comment %} <div class="box"> {% endcomment %}
+              <div class="col" style="padding: 0; padding-left: 12px;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="theme-label-contact form-control">来訪日</div>
+                  </div>
+                  {{ visitor.date }}
+                </div>
+              </div>
+              <div class="col" style="padding: 0; padding-right: 12px;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="theme-label-time-contact form-control">入室時刻</div>
+                  </div>
+                  {{ visitor.time }}
+                </div>
+              </div>
+            {% comment %} </div> {% endcomment %}
+              <h3>来訪者</h3>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-contact form-control">会社名</div>
+                </div>
+                {{ visitor.company_name }}
+              </div>
+              <div class="col-8" style="padding: 0; padding-left: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-contact form-control">お名前</div>
+                </div>
+                {{ visitor.visitor_name }}
+              </div>
+              </div>
+              <div class="col-4" style="padding: 0; padding-right: 12px;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="theme-label-tempcheck-contact form-control">検温</div>
+                  </div>
+                  {{ visitor.temperature }}
+                </div>
+              </div>
+            </div>
+            {% if visitor.accompany1_name %}
+            <div class="row" style="padding: 0;">
+              {% comment %} <div class="accompany1"> {% endcomment %}
+              <div class="col-8" style="padding: 0; padding-left: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-contact form-control">お名前</div>
+                </div>
+                {{ visitor.accompany1_name }}
+              </div>
+              </div>
+              <div class="col-4" style="padding: 0; padding-right: 12px;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="theme-label-tempcheck-contact form-control">検温</div>
+                  </div>
+                  {{ visitor.accompany1_temp }}
+                </div>
+              </div>
+              {% comment %} </div> {% endcomment %}
+            </div>
+            {% endif %}
+            {% if visitor.accompany2_name %}
+              {% comment %} </div> {% endcomment %}
+              {% comment %} <div class="accompany2" style="display: none;"> {% endcomment %}
+            <div class="row" style="padding: 0;">
+              <div class="col-8" style="padding: 0; padding-left: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-contact form-control">お名前</div>
+                </div>
+                {{ visitor.accompany2_name }}
+              </div>
+              </div>
+              <div class="col-4" style="padding: 0; padding-right: 12px;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="theme-label-tempcheck-contact form-control">検温</div>
+                  </div>
+                  {{ visitor.accompany2_temp }}
+                </div>
+              </div>
+              </div>
+            </div>
+            {% endif %}
+            {% if visitor.accompany3_name %}
+              {% comment %} </div> {% endcomment %}
+              {% comment %} <div class="accompany3" style="display: none;"> {% endcomment %}
+            <div class="row">
+              <div class="col-8" style="padding: 0; padding-left: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-contact form-control">お名前</div>
+                </div>
+                {{ visitor.accompany3_name }}
+              </div>
+              </div>
+              <div class="col-4" style="padding: 0; padding-right: 12px;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="theme-label-tempcheck-contact form-control">検温</div>
+                  </div>
+                  {{ visitor.accompany3_temp }}
+                </div>
+              </div>
+              </div>
+            </div>
+            {% endif %}
+            
+        <div class="row">
+            <h3>訪問先</h3>
+            <div class="input-group">
+  
+              <div class="input-group-prepend">
+                <div class="theme-label-contact form-control">担当者</div>
+              </div>
+            
+  
+              {% comment %} <div class="col-3" style="padding-left: 0px; padding-right: 0px"> {% endcomment %}
+              <div class="left-column-contact">
+                {{ visitor.position }}
+              </div>
+              {% comment %} <div class="col-7" style="padding-right: -12px;"> {% endcomment %}
+              <div class="right-column-contact">
+                {{ visitor.interviewer }}
+              </div>
+            </div>
+  
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label-textarea-contact form-control" rows="5">ご用件</div>
+              </div>
+              {{ visitor.content | linebreaksbr }}
+            </div>
+        </div>
+
+      <div class="row">
+
+
+        <h3>担当者記入欄<span style="color: red;">*</span></h3>
+        {% if visitor.is_contacted %}
+
+        <div class="col" style="padding: 0; padding-left: 12px;">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="theme-label-contact form-control">担当者</div>
+            </div>
+            {{ contact.interviewer }}
+          </div>
+        </div>
+        <div class="col" style="padding: 0; padding-right: 12px;">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="theme-label-time-contact form-control">退室時刻</div>
+            </div>
+            {{ contact.time }}
+          </div>
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="theme-label-textarea-contact form-control" rows="5">内容</div>
+          </div>
+          {{ contact.contents }}
+        </div>
+
+        <div>
+        <br>
+        </div>
+
+        <div class="row" style="padding-right: 1px; padding-left: 24px;">
+        {% comment %} <button type="button" class="btn btn-primary btn-sm" style="background-color:#006400;" onclick="location.href='{% url 'test_app:edit_contact' %}'"> {% endcomment %}
+        <button type="button" class="btn btn-primary btn-sm col" style="background-color:#28a745; padding-left: 12px;" onclick="location.href='#'">
+            コンタクト編集
+        </button>
+        {% comment %} <button type="button" class="btn btn-primary btn-sm" style="background-color:#006400;" onclick="location.href='{% url 'test_app:edit_contact' %}'"> {% endcomment %}
+            <button type="button" class="btn btn-primary btn-sm col" style="background-color:#28a745;" onclick="location.href='#'">
+            来訪/コンタクト編集
+        </button>
+        {% comment %} <button type="button" class="btn btn-primary btn-sm" style="background-color:#006400;" onclick="location.href='{% url 'test_app:edit_contact' %}'"> {% endcomment %}
+            <button type="button" class="btn btn-primary btn-sm col" style="background-color:#28a745;" onclick="location.href='#'">
+            コンタクト削除
+        </button>
+        {% comment %} <button type="button" class="btn btn-primary btn-sm" style="background-color:#006400;" onclick="location.href='{% url 'test_app:edit_contact' %}'"> {% endcomment %}
+            <button type="button" class="btn btn-primary btn-sm col" style="background-color:#28a745; padding-right: 12px;" onclick="location.href='#'">
+            来訪/コンタクト削除
+        </button>
+        </div>
+
+        {% else %}
+
+        <form action="{% url 'test_app:confirm_contact' visitor.pk %}" method="post">
+         {% csrf_token %}
+        <div class="row">
+        
+            <div class="col" style="padding: 0; padding-left: 12px;">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="theme-label-contact-edit form-control">担当者</div>
+                  </div>
+                  {{ form }}
+                </div>
+            </div>
+            <div class="col" style="padding: 0; padding-right: 12px;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    <div class="theme-label-time-contact-edit form-control">退室時刻</div>
+                    </div>
+                    <input name="time" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                <div class="theme-label-textarea-contact-edit form-control" rows="5">内容</div>
+                </div>
+                <textarea name="contents" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+
+            <div>
+            <br>
+            </div>
+                
+            <div class="row" style="padding-right: 1px; padding-left: 24px;">
+            <button type="submit" class="btn btn-primary btn-lg" style="background-color:#999900;" autofocus>確認画面へ</button>
+            </div>
+
+            <div>
+            <br>
+            </div>
+            
+        </div>
+        </form>
+
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 40%; 
+}
+
+.h1-title {
+    color:rgb(135, 137, 6);
+}
+
+.h3-title {
+    color:rgb(135, 137, 6);
+}
+
+.w-auto {
+    width: auto !important;
+}
+
+.theme-label {
+    background-color:#999900;
+    color:white;
+    width: 6em;
+}
+  
+.theme-label-time {
+    background-color:#999900;
+    color:white;
+    width: 7em;
+}
+
+.theme-label-tempcheck {
+    background-color:#999900;
+    color:white;
+    width: 5em;
+}
+
+.theme-label-textarea {
+    background-color:#999900;
+    color:white;
+    width: 6em;
+    height: 6.5em;
+}
+
+.box{
+    padding: 15px;
+}
+
+
+.left-column {
+
+float: left;
+width: 30%; /* 要素の幅を50%に定義 */
+background-color: #aaa; /* 視覚化のための背景色 */
+
+}
+
+.right-column {
+
+float: right;
+width: 53.8%; /* 要素の幅を50%に定義 */
+background-color: #ddd; /* 視覚化のための背景色 */
+
+}
+
+
+
+
+/* 主に管理者側の画面CSS */
+.theme-label-contact {
+    background-color:#28a745;
+    color:white;
+    width: 6em;
+}
+  
+.theme-label-time-contact {
+    background-color:#28a745;
+    color:white;
+    width: 7em;
+}
+
+.theme-label-textarea-contact {
+    background-color:#28a745;
+    color:white;
+    width: 6em;
+    height: 6.5em;
+}
+  
+.theme-label-contact-edit {
+    background-color:#999900;
+    color:white;
+    width: 6em;
+}
+  
+.theme-label-time-contact-edit {
+    background-color:#999900;
+    color:white;
+    width: 7em;
+}
+
+.theme-label-textarea-contact-edit {
+    background-color:#999900;
+    color:white;
+    width: 6em;
+    height: 6.5em;
+}
+  
+.container-fluid-list {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 90%; 
+}
+
+
+/* 担当者プルダウンメニューFormのサイズ */
+#id_member {
+    width: 67%;
+}
+
+.styled {
+    border: 0;
+    line-height: 2.5;
+    padding: 0 10px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: #28a745;
+    background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+    width: 4rem;                
+}
+
+.styled:hover {
+    background-color: #64dc80;
+}
+
+.styled:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+.left-column-contact {
+
+    float: left;
+    width: 30%; /* 要素の幅を50%に定義 */
+    background-color: white; /* 視覚化のための背景色 */
+
+}
+
+.right-column-contact {
+
+float: right;
+width: 53.8%; /* 要素の幅を50%に定義 */
+background-color: white; /* 視覚化のための背景色 */
+
+}
+
+
+.theme-label-tempcheck-contact {
+    background-color:#28a745;
+    color:white;
+    width: 5em;
+}
+/* 
+.btn-lg {
+    padding-right: 12px;
+    padding-left: 12px;
+}   */
+/* 
+.col {
+    padding: 0px;
+} */
+/* 
+.row {
+    padding: 15px;
+} */
+/* .input-group{
+    padding: 0px;
+
+} */

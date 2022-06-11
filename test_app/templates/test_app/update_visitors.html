@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+{% load static %}
+{% load widget_tweaks %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
+  <title>INDEX</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+          <h1 class="h1-title" style="text-align: center">来訪者カード編集</h1>
+          {% comment %} <div>
+          {{msg}}<br><br>
+          </div> {% endcomment %}
+          <h3 class="h3-title">来訪日時</h3>
+          {% comment %} <div class="box"> {% endcomment %}
+            <div class="col" style="padding: 0; padding-left: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label form-control">来訪日<span style="color: red;">*</span></div>
+                </div>
+                {% render_field  form.date class="form-control" %}
+              </div>
+            </div>
+            <div class="col" style="padding: 0; padding-right: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-time form-control">入室時刻<span style="color: red;">*</span></div>
+                </div>
+                {% render_field  form.time  class="form-control" %}
+              </div>
+            </div>
+          </div>
+          {% comment %} </div> {% endcomment %}
+            <h3 class="h3-title">来訪者</h3>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label form-control">会社名</div>
+              </div>
+              {% render_field  form.company_name  class="form-control" %}
+            </div>
+            <div class="row">
+            <div class="col-8" style="padding: 0; padding-left: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label form-control">お名前<span style="color: red;">*</span></div>
+              </div>
+              {% render_field  form.visitor_name  class="form-control" %}
+            </div>
+            </div>
+            <div class="col-4" style="padding: 0; padding-right: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
+                </div>
+                {% render_field  form.temperature  class="form-control" %}
+              </div>
+            </div>
+          </div>
+          </div>
+          <h3 class="h3-title">同行者</h3>
+          <div class="accompany1" style="display: blank;">
+          <div class="row" style="padding: 0;">
+            {% comment %} <div class="accompany1"> {% endcomment %}
+            <div class="col-8" style="padding: 0; padding-left: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label form-control">お名前<span style="color: red;">*</span></div>
+              </div>
+              {% render_field  form.accompany1_name  class="form-control" %}
+            </div>
+            </div>
+            <div class="col-4" style="padding: 0; padding-right: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
+                </div>
+                {% render_field  form.accompany1_temp  class="form-control" %}
+              </div>
+            </div>
+            {% comment %} </div> {% endcomment %}
+          </div>
+          </div>
+            {% comment %} </div> {% endcomment %}
+            {% comment %} <div class="accompany2" style="display: none;"> {% endcomment %}
+          <div class="accompany2" style="display: blank;">
+            <div class="row" style="padding: 0;">
+            <div class="col-8" style="padding: 0; padding-left: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label form-control">お名前<span style="color: red;">*</span></div>
+              </div>
+              {% render_field  form.accompany2_name  class="form-control" %}
+            </div>
+            </div>
+            <div class="col-4" style="padding: 0; padding-right: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
+                </div>
+                {% render_field  form.accompany2_temp  class="form-control" %}
+              </div>
+            </div>
+            </div>
+          </div>
+            {% comment %} </div> {% endcomment %}
+            {% comment %} <div class="accompany3" style="display: blank;"> {% endcomment %}
+          <div class="accompany3" style="display: blank;">
+            <div class="row">
+            <div class="col-8" style="padding: 0; padding-left: 12px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label form-control">お名前<span style="color: red;">*</span></div>
+              </div>
+              {% render_field  form.accompany3_name  class="form-control" %}
+            </div>
+            </div>
+            <div class="col-4" style="padding: 0; padding-right: 12px;">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
+                </div>
+                {% render_field  form.accompany3_temp  class="form-control" %}
+              </div>
+            </div>
+            </div>
+          </div>
+            {% comment %} </div> {% endcomment %}
+          <div class="row">
+            <h3 class="h3-title">訪問先</h3>
+            <div class="input-group">
+  
+              <div class="input-group-prepend">
+                <div class="theme-label form-control">担当者</div>
+              </div>
+            
+  
+              {% comment %} <div class="col-3" style="padding-left: 0px; padding-right: 0px"> {% endcomment %}
+              <div class="left-column">
+                {% render_field  form.position  class="form-control" %}
+              </div>
+              {% comment %} <div class="col-7" style="padding-right: -12px;"> {% endcomment %}
+              <div class="right-column">
+                {% render_field  form.interviewer  class="form-control" %}
+              </div>
+            </div>
+  
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="theme-label-textarea form-control" rows="5">ご用件</div>
+              </div>
+              {% render_field  form.content  class="form-control" style="height: 6rem;" %}
+            </div>
+            
+            <div>
+            <br>
+            </div>
+  
+            <div class="row" style="padding-right: 1px; padding-left: 24px;">
+              <button type="submit" class="btn btn-primary btn-lg" style="background-color:rgb(135, 137, 6);" autofocus>確認画面へ</button>
+            </div>
+        </form>
+    </div>
+  </div>
+
+</body>
+</html>

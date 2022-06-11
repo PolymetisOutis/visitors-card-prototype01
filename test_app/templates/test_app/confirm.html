@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row" style="display: center;">
+  <form action="{% url 'test_app:sent' %}" method="post">
+    {% csrf_token %}
+      <h1>Confirm!!</h1>
+      <p>日付：{{ date }}</p>
+      <input type="hidden" name="date" value="{{ date }}"> 
+      <p>時刻：{{ time }}</p>
+      <input type="hidden" name="time" value="{{ time }}">
+      <p>会社名：{{ company_name }}</p>
+      <input type="hidden" name="company_name" value="{{ company_name }}">
+      <p>お名前：{{ visitor_name }}　/検温：{{ temperature }}</p>
+      <input type="hidden" name="visitor_name" value="{{ visitor_name }}">
+      <input type="hidden" name="temperature" value="{{ temperature }}">
+      {% if accompany1_name %}
+      <p>同行者；{{ accompany1_name }}　/検温：{{ accompany1_temp }}</p>
+      <input type="hidden" name="accompany1_name" value="{{ accompany1_name }}">
+      <input type="hidden" name="accompany1_temp" value="{{ accompany1_temp }}">
+      {% endif %}
+      {% if accompany2_name %}
+      <p>同行者：{{ accompany2_name }}　/検温：{{ accompany2_temp }}</p>
+      <input type="hidden" name="accompany2_name" value="{{ accompany2_name }}">
+      <input type="hidden" name="accompany2_temp" value="{{ accompany2_temp }}">
+      {% endif %}
+      {% if accompany3_name %}
+      <p>同行者：{{ accompany3_name }}　/検温：{{ accompany3_temp }}</p>
+      <input type="hidden" name="accompany3_name" value="{{ accompany3_name }}">
+      <input type="hidden" name="accompany3_temp" value="{{ accompany3_temp }}">
+      {% endif %}
+      <p>担当者：{{ position }} / {{ interviewer }}</p>
+      <p>ご用件：{{ content }}</p>
+      <input type="hidden" name="position" value="{{ position }}">
+      <input type="hidden" name="interviewer" value="{{ interviewer }}">
+      <input type="hidden" name="content" value="{{ content }}">
+      <button type="button" class="btn btn-primary btn-lg" onClick="javascript:history.go(-1);">修正する</button>
+      <button type="submit" class="btn btn-primary btn-lg" style="background-color:rgb(135, 137, 6);" autofocus>送信</button>
+    </form>
+  </div>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>INDEX</title>
+  </head>
+  <body>
+    <h1>ご入力ありがとうございました。</h1>
+    <script>
+    setTimeout(function(){
+        window.location.href = '{% url 'test_app:welcome' %}';
+      }, 5*1000);
+    </script>
+  </body>
+</html>
