@@ -29,6 +29,7 @@
             <th scope="col" width="6%">操作</td>
             <th scope="col" width="6%">操作</td>
             <th scope="col" width="6%">操作</td>
+            <th scope="col" width="6%">操作</td>
           </tr>
         </thead>
         {% for visitor in visitors %}
@@ -67,13 +68,16 @@
             {% endif %}
             {% if visitor.contact.pk %}
             <td>
-              <button class="favorite styled" type="button" onclick="location.href='{% url 'test_app:update_contact_all' visitor.pk %}'">編集3</button>
+              <button class="favorite styled" type="button" onclick="location.href='{% url 'test_app:update_allpost' visitor.pk %}'">編集3</button>
             </td>
             {% else %}
             <td></td>
             {% endif %}
             <td>
-              <button class="favorite styled" type="button" onclick="location.href='#'">削除</button>
+              <button class="favorite styled" type="button" onclick="location.href='#'">削除1</button>
+            </td>
+            <td>
+              <button class="favorite styled" type="button" onclick="location.href='#'">削除2</button>
             </td>
           </tr>
         </tbody>

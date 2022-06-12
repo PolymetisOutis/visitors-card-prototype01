@@ -11,6 +11,15 @@
   <body>
     <div class="container-fluid">
         <div class="row">
+            <!-- メッセージ表示 -->
+              {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                   {{ message }}
+                </div>
+                {% endfor %}
+              {% endif %}
+
             {% comment %} <div>
             {{msg}}<br><br>
             </div> {% endcomment %}
@@ -179,7 +188,7 @@
           <div class="input-group-prepend">
             <div class="theme-label-textarea-contact form-control" rows="5">内容</div>
           </div>
-          {{ contact.contents }}
+          {{ contact.contents | linebreaksbr }}
         </div>
 
         <div>
@@ -224,7 +233,7 @@
                     <div class="input-group-prepend">
                     <div class="theme-label-time-contact-edit form-control">退室時刻</div>
                     </div>
-                    <input name="time" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+                    <input name="time" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
                 </div>
             </div>
             <div class="input-group">

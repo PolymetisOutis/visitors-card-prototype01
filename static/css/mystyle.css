@@ -57,7 +57,7 @@ background-color: #aaa; /* 視覚化のための背景色 */
 .right-column {
 
 float: right;
-width: 53.8%; /* 要素の幅を50%に定義 */
+width: 55.6%; /* 要素の幅を50%に定義 */
 background-color: #ddd; /* 視覚化のための背景色 */
 
 }
@@ -101,7 +101,7 @@ background-color: #ddd; /* 視覚化のための背景色 */
     background-color:#999900;
     color:white;
     width: 6em;
-    height: 6.5em;
+    height: 15.8em;
 }
   
 .container-fluid-list {
@@ -183,3 +183,11 @@ background-color: white; /* 視覚化のための背景色 */
     padding: 0px;
 
 } */
+
+/* 更新画面 */
+
+.container-fluid-updateall {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 40%; 
+}

@@ -12,16 +12,16 @@
   <title>INDEX</title>
 </head>
 <body>
-  <div class="container-fluid-list">
+  <div class="container-fluid-updateall">
     <div class="row">
       <form method="POST">
         {% csrf_token %}
         <div class="row">
-          <h1 class="h1-title" style="text-align: center">来訪者カード編集</h1>
+          <h1 style="text-align: center">来訪者カード編集</h1>
           {% comment %} <div>
           {{msg}}<br><br>
           </div> {% endcomment %}
-          <h3 class="h3-title">来訪日時</h3>
+          <h3>来訪日時</h3>
           {% comment %} <div class="box"> {% endcomment %}
             <div class="col" style="padding: 0; padding-left: 12px;">
               <div class="input-group">
@@ -41,7 +41,7 @@
             </div>
           </div>
           {% comment %} </div> {% endcomment %}
-            <h3 class="h3-title">来訪者</h3>
+            <h3>来訪者</h3>
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="theme-label form-control">会社名</div>
@@ -67,7 +67,7 @@
             </div>
           </div>
           </div>
-          <h3 class="h3-title">同行者</h3>
+          <h3>同行者</h3>
           <div class="accompany1" style="display: blank;">
           <div class="row" style="padding: 0;">
             {% comment %} <div class="accompany1"> {% endcomment %}
@@ -136,7 +136,7 @@
           </div>
             {% comment %} </div> {% endcomment %}
           <div class="row">
-            <h3 class="h3-title">訪問先</h3>
+            <h3>訪問先</h3>
             <div class="input-group">
   
               <div class="input-group-prepend">
@@ -161,26 +161,16 @@
               {% render_field  form.content  class="form-control" style="height: 6rem;" %}
             </div>
             
-            <div>
-            <br>
-            </div>
-  
-            <div class="row" style="padding-right: 1px; padding-left: 24px;">
-              <button type="submit" class="btn btn-primary btn-lg" style="background-color:rgb(135, 137, 6);" autofocus>確認画面へ</button>
-            </div>
-        </form>
-
         <h3>担当者記入欄<span style="color: red;">*</span></h3>
-        <form method="post">
           {% csrf_token %}
          <div class="row">
-         
-             <div class="col" style="padding: 0; padding-left: 12px;">
+         {% for field in formset %}
+            <div class="col" style="padding: 0; padding-left: 12px;">
                  <div class="input-group">
                    <div class="input-group-prepend">
                      <div class="theme-label-contact-edit form-control">担当者</div>
                    </div>
-                   {% render_field  form.contact.interviewer  class="form-control" style="width: 6rem;" %}
+                   {% render_field  field.interviewer  class="form-control" style="width: 6rem;" %}
                  </div>
              </div>
              <div class="col" style="padding: 0; padding-right: 12px;">
@@ -188,27 +178,30 @@
                      <div class="input-group-prepend">
                      <div class="theme-label-time-contact-edit form-control">退室時刻</div>
                      </div>
-                     {% render_field  form.contact.time  class="form-control" %}
+                     {% render_field  field.time  class="form-control" %}
                  </div>
              </div>
              <div class="input-group">
                  <div class="input-group-prepend">
                  <div class="theme-label-textarea-contact-edit form-control" rows="5">内容</div>
                  </div>
-                 {% render_field  form.contact.contents  class="form-control" %}
+                 {% render_field  field.contents  class="form-control" %}
              </div>
- 
-             <div>
-             <br>
-             </div>
-                 
-             <div class="row" style="padding-right: 1px; padding-left: 24px;">
-             <button type="submit" class="btn btn-primary btn-lg" style="background-color:#999900;" autofocus>確認画面へ</button>
-             </div>
- 
-             <div>
-             <br>
-             </div>
+          {% endfor %}
+              <div>
+              <br>
+              </div>
+                  
+              <div class="row" style="padding-right: 1px; padding-left: 24px;">
+              <button type="submit" class="btn btn-primary btn-lg" style="background-color:#999900;" autofocus>確認画面へ</button>
+              </div>
+              {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+              {% endfor %}
+              {{ formset.management_form }}
+              <div>
+              <br>
+              </div>
              
          </div>
          </form>

@@ -17,7 +17,7 @@ class Visitors(models.Model):
     accompany3_temp = models.FloatField(verbose_name='同行者3検温', null=True, blank=True)
     position = models.CharField(verbose_name='役職', max_length=25, null=True, blank=True)
     interviewer = models.CharField(verbose_name='担当者', max_length=25, null=True, blank=True)
-    content = models.TextField(verbose_name='ご用件')
+    content = models.TextField(verbose_name='ご用件', null=True, blank=True)
     is_contacted = models.BooleanField(default=False, help_text='コンタクトしたらTrue')
 
 
@@ -42,8 +42,8 @@ class Post(models.Model):
         verbose_name_plural = '役職'
 
 class Member(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
-    name = models.CharField(verbose_name='氏名', max_length=25)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(verbose_name='氏名', max_length=25, null=True, blank=True)
 
     def __str__(self):
         return self.post.name + ' / ' + self.name
@@ -55,12 +55,16 @@ class Member(models.Model):
 
 class Contact(models.Model):
     contact = models.OneToOneField(Visitors, on_delete=models.CASCADE, verbose_name='来訪者履歴')
-    interviewer = models.ForeignKey(Member, on_delete=models.CASCADE, verbose_name='担当者')
-    time = models.TimeField(verbose_name='退室時刻')
-    contents = models.TextField(verbose_name='内容')
+    interviewer = models.ForeignKey(Member, on_delete=models.CASCADE, verbose_name='担当者', null=True, blank=True)
+    time = models.TimeField(verbose_name='退室時刻', null=True, blank=True)
+    contents = models.TextField(verbose_name='内容', null=True, blank=True)
 
     def __str__(self):
-        return str(self.contact.date) + ' / ' + self.contact.visitor_name  + ' / ' + self.interviewer.name
+        if self.interviewer == None:
+            self.interviewer = Member.objects.get(id=9)
+            return str(self.contact.date) + ' / ' + self.contact.visitor_name  + ' / ' + self.interviewer.name
+        else:
+            return str(self.contact.date) + ' / ' + self.contact.visitor_name  + ' / ' + self.interviewer.name
 
     class Meta:
         db_table = 'contact_history'

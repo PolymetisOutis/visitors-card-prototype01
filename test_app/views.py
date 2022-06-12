@@ -1,9 +1,13 @@
 from turtle import position
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from .models import *
 from django.urls import reverse_lazy
 from .forms import ContactForm, MemberForm, VisitorsForm
 from django.views.generic import UpdateView
+from django import forms
+from django.shortcuts import redirect
+from django.contrib import messages
+
 # Create your views here.
 
 def index(request):
@@ -17,7 +21,7 @@ def welcome(request):
     context = {
         'msg': 'ようこそ！！'
     }
-    return render(request, 'test_app/welcome.html', context)
+    return render(request, 'test_app/entry_form/welcome.html', context)
 
 
 def confirm(request):
@@ -62,7 +66,7 @@ def sent(request):
         temperature=temperature, accompany1_name=accompany1_name, accompany1_temp=accompany1_temp, accompany2_name=accompany2_name,
         accompany2_temp=accompany2_temp, accompany3_name=accompany3_name, accompany3_temp=accompany3_temp, position=position,
         interviewer=interviewer, content=content)
-    return render(request, 'test_app/thankyou.html')
+    return render(request, 'test_app/lazy/thankyou.html')
 
 
 def history(request):
@@ -117,7 +121,6 @@ def confirm_contact(request, pk):
 
 def sent_contact(request, pk):
     visitor = Visitors.objects.get(pk=pk)
-    visitor.is_contacted = True
     visitor.save()
     if request.method == 'POST':
         contact = visitor
@@ -127,13 +130,24 @@ def sent_contact(request, pk):
         idx = interviewer_post_name.find(target)
         interviewer_name = interviewer_post_name[idx+2:]
         print(interviewer_name)
-
-        interviewer = Member.objects.get(name=interviewer_name)
+        if interviewer_post_name == "None":
+            interviewer = None
+        else:
+            interviewer = Member.objects.get(name=interviewer_name)
+            visitor.is_contacted = True
         time = request.POST.get('time')
+        if time == "":
+            time = '00:00'
         contents = request.POST.get('contents')
+        try:
+            contact = Contact.objects.get(contact_id=pk)
+            contact.interviewer = interviewer
+            contact.time = time
+            contact.contents = contents
+        except:
+            Contact.objects.create(contact=contact, interviewer=interviewer, time=time, contents=contents)
 
-        Contact.objects.create(contact=contact, interviewer=interviewer, time=time, contents=contents)
-    return render(request, 'test_app/thankyou_contact.html')
+    return render(request, 'test_app/lazy/thankyou_contact.html')
 
 
 """
@@ -145,6 +159,7 @@ class VisitorsUpdate(UpdateView):
     model = Visitors
     
     def get_success_url(self):
+        messages.info(self.request, f'訪問者情報を更新しました！')
         return reverse_lazy('test_app:detail', kwargs={'pk': self.kwargs['pk']})
 
 
@@ -153,10 +168,11 @@ class ContactUpdate(UpdateView):
     form_class = ContactForm
     model = Contact
 
-    def get_success_url(self):
-        return reverse_lazy('test_app:detail', kwargs={'pk': self.kwargs['pk']})
+    def get_success_url(self, **kwargs):
+        messages.info(self.request, f'担当者情報を更新しました！')
+        return reverse_lazy('test_app:detail', kwargs={'pk': self.kwargs['id']})
 
-    def get_context_data(self):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['visitor'] = Visitors.objects.get(pk=self.kwargs['id'])
         return context
@@ -176,22 +192,52 @@ class ContactUpdate(UpdateView):
     #     return context
 
 
-from extra_views import InlineFormSetView, UpdateWithInlinesView
+# from extra_views import InlineFormSetView, UpdateWithInlinesView
 
 
-class ContactInlineFormSet(InlineFormSetView):
-    model = Contact
-    fields = ("interviewer", "time", "contents")
-    can_delete = True
+# class ContactInlineFormSet(InlineFormSetView):
+#     model = Contact
+#     fields = ("interviewer", "time", "contents")
+#     can_delete = True
 
-class VisitorsContactUpdateFormSetView(UpdateWithInlinesView):
-    model = Visitors
-    fields = ('date', 'time', 'company_name', 'visitor_name', 'temperature',
-                'accompany1_name', 'accompany1_temp', 'accompany2_name', 'accompany2_temp',
-                'accompany3_name', 'accompany3_temp', 'position', 'interviewer', 'content',
-                'is_contacted')
-    inlines = [ContactInlineFormSet, ]
-    template_name = "test_app/update_contact.html"
+# class VisitorsContactUpdateFormSetView(UpdateWithInlinesView):
+#     model = Visitors
+#     fields = ('date', 'time', 'company_name', 'visitor_name', 'temperature',
+#                 'accompany1_name', 'accompany1_temp', 'accompany2_name', 'accompany2_temp',
+#                 'accompany3_name', 'accompany3_temp', 'position', 'interviewer', 'content',
+#                 'is_contacted')
+#     inlines = [ContactInlineFormSet, ]
+#     template_name = "test_app/update_contact.html"
     
-    def get_success_url(self):
-        return reverse_lazy('test_app:detail', kwargs={'pk': self.kwargs['pk']})
+#     def get_success_url(self):
+#         return reverse_lazy('test_app:detail', kwargs={'pk': self.kwargs['pk']})
+
+
+
+
+
+def update_allpost(request, pk):
+    visitors = get_object_or_404(Visitors, pk=pk)
+    form = VisitorsForm(request.POST or None, instance=visitors)
+    ContactFormset = forms.inlineformset_factory(
+            Visitors, Contact, fields=('contact', 'interviewer', 'time', 'contents'),
+            can_delete=False
+        )
+    formset = ContactFormset(request.POST or None, instance=visitors)  # 今回はファイルなのでrequest.FILESが必要
+    if request.method == 'POST' and form.is_valid() and formset.is_valid():
+        form.save()
+        form.save()
+        formset.save()
+        print('POSTメソッド')
+        return redirect('test_app:detail', pk=pk)
+    else:
+        print('POSTメソッドだけども・・・')
+
+    # エラーメッセージつきのformsetをテンプレートへ渡すため、contextに格納
+    context = {
+        'form': form,
+        'formset': formset,
+    }
+    print(formset)
+    print('GETメソッド')
+    return render(request, 'test_app/update_allpost.html', context)
