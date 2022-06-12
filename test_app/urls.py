@@ -5,6 +5,7 @@ app_name = 'test_app'
 
 urlpatterns = [
     path('index/', views.index, name='index'),
+    
     path('welcome/', views.welcome, name='welcome'),
     path('confirm/', views.confirm, name='confirm'),
     path('thankyou/', views.sent, name='sent'),
