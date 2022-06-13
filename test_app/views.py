@@ -220,16 +220,24 @@ def update_allpost(request, pk):
     visitors = get_object_or_404(Visitors, pk=pk)
     form = VisitorsForm(request.POST or None, instance=visitors)
     ContactFormset = forms.inlineformset_factory(
-            Visitors, Contact, fields=('contact', 'interviewer', 'time', 'contents'),
-            can_delete=False
+            Visitors, Contact, fields=('interviewer', 'time', 'contents'),
+            can_delete=False,
+            widgets={
+                'interviewer': forms.Select(attrs={'class': 'form-control'}),
+                'time': forms.TimeInput(attrs={'class': 'form-control'}),
+                'contents': forms.Textarea(attrs={'class': 'form-control'}),
+            }
         )
     formset = ContactFormset(request.POST or None, instance=visitors)  # 今回はファイルなのでrequest.FILESが必要
-    if request.method == 'POST' and form.is_valid() and formset.is_valid():
+    if request.method == 'POST' and form.is_valid():
         form.save()
-        form.save()
-        formset.save()
         print('POSTメソッド')
-        return redirect('test_app:detail', pk=pk)
+        print(formset.errors)
+        print()
+        if formset.is_valid():
+            print('formset.save()')
+            formset.save()
+            return redirect('test_app:detail', pk=pk)
     else:
         print('POSTメソッドだけども・・・')
 

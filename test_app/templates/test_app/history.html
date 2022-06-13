@@ -20,10 +20,10 @@
             <th scope="col">id</th>
             <th scope="col">日付</th>
             <th scope="col">会社名</th>
-            <th scope="col" width="13%">訪問者氏名</th>
-            <th scope="col" width="25%">ご用件</th>
+            <th scope="col" width="8%">訪問者氏名</th>
+            <th scope="col" width="20%">ご用件</th>
             <th scope="col" width="10%">対応担当者</th>
-            <th scope="col" width="10%">内容</th>
+            <th scope="col" width="16%">内容</th>
             <th scope="col" width="3%"></th>
             <th scope="col" width="6%">操作</td>
             <th scope="col" width="6%">操作</td>
@@ -47,7 +47,7 @@
             <td></td>
             {% endif %}
             {% if visitor.is_contacted %}
-            <td>{{ visitor.contact.contents | linebreaksbr | truncatechars:15 }}</td>
+            <td>{{ visitor.contact.contents | linebreaksbr | truncatechars:30 }}</td>
             {% else %}
             <td></td>
             {% endif %}

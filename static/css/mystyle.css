@@ -191,3 +191,28 @@ background-color: white; /* 視覚化のための背景色 */
     margin-left: auto;
     max-width: 40%; 
 }
+
+
+
+@media screen and (max-width:480px){
+    /*画面幅が480pxまでの時*/
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 70%; 
+  }
+  html {
+      font-size: 50%;
+  }
+  .img-sp {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+  }
+  .name-sp {
+    margin-left: -6px;
+  }
+  .temp-sp {
+    margin-right: -6px;
+  }
+  }

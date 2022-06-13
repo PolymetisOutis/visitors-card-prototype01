@@ -164,30 +164,81 @@
         <h3>担当者記入欄<span style="color: red;">*</span></h3>
           {% csrf_token %}
          <div class="row">
-         {% for field in formset %}
-            <div class="col" style="padding: 0; padding-left: 12px;">
+         {% comment %} {% for field in formset %} {% endcomment %}
+            {% comment %} <div class="col" style="padding: 0; padding-left: 12px;">
                  <div class="input-group">
                    <div class="input-group-prepend">
-                     <div class="theme-label-contact-edit form-control">担当者</div>
-                   </div>
-                   {% render_field  field.interviewer  class="form-control" style="width: 6rem;" %}
+                     <div class="theme-label-contact-edit form-control" for="id_contact-0-interviewer">担当者</div>
+                   </div> {% endcomment %}
+                   {% comment %} {% render_field  field.interviewer  class="form-control" style="width: 6rem;" %} {% endcomment %}
+                   {% comment %} {{ formset.0.interviewer }}
                  </div>
              </div>
              <div class="col" style="padding: 0; padding-right: 12px;">
                  <div class="input-group">
                      <div class="input-group-prepend">
-                     <div class="theme-label-time-contact-edit form-control">退室時刻</div>
-                     </div>
-                     {% render_field  field.time  class="form-control" %}
+                     <div class="theme-label-time-contact-edit form-control" for="id_contact-0-time">退室時刻</div>
+                     </div> {% endcomment %}
+                     {% comment %} {% render_field  field.time  class="form-control" %} {% endcomment %}
+                     {% comment %} {{ formset.0.time }}
                  </div>
              </div>
              <div class="input-group">
                  <div class="input-group-prepend">
-                 <div class="theme-label-textarea-contact-edit form-control" rows="5">内容</div>
-                 </div>
-                 {% render_field  field.contents  class="form-control" %}
-             </div>
-          {% endfor %}
+                 <div class="theme-label-textarea-contact-edit form-control" rows="5" for="id_contact-0-contents">内容</div>
+                 </div> {% endcomment %}
+                 {% comment %} {% render_field  field.contents  class="form-control" %} {% endcomment %}
+                 {% comment %} {{ formset.0.contents }}
+             </div> {% endcomment %}
+                    {% for field in formset %}
+                        
+                          {% for hidden in field.hidden_fields %}
+                            {{ hidden }}
+                          {% endfor %}
+                          {% comment %} {{ field.visible_fields.0 }}
+                          {{ field.visible_fields.1 }}
+                          {{ field.visible_fields.2 }} {% endcomment %}
+
+                          {% for field in field.visible_fields %}
+                            {% comment %} <div class="fieldWrapper">
+                              {{ field.errors }}
+                              {{ field.label_tag }} {{ field }}
+                            </div>
+                            <div class="fieldWrapper"> {% endcomment %}
+                            {% if forloop.counter == 1 %}
+                            <div class="col" style="padding: 0; padding-left: 12px;">
+                                <div class="input-group">
+                                  <div class="input-group-prepend">
+                                    <div class="theme-label-contact-edit form-control" for="id_contact-0-interviewer">担当者</div>
+                                  </div>
+                                  {% comment %} {% render_field  field.interviewer  class="form-control" style="width: 6rem;" %} {% endcomment %}
+                                  {{ field }}
+                                </div>
+                            </div>                
+                            {% endif %}
+                            {% if forloop.counter == 2 %}
+                            <div class="col" style="padding: 0; padding-right: 12px;">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    <div class="theme-label-time-contact-edit form-control" for="id_contact-0-time">退室時刻</div>
+                                    </div>
+                                    {% comment %} {% render_field  field.time  class="form-control" %} {% endcomment %}
+                                {{ field }}
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% if forloop.counter == 3 %}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                <div class="theme-label-textarea-contact-edit form-control" rows="5" for="id_contact-0-contents">内容</div>
+                                </div>
+                                {% comment %} {% render_field  field.contents  class="form-control" %} {% endcomment %}
+                                    {{ field }}
+                            </div>
+                            {% endif %}
+                          {% endfor %}
+
+                      {% endfor %}
               <div>
               <br>
               </div>
@@ -195,9 +246,6 @@
               <div class="row" style="padding-right: 1px; padding-left: 24px;">
               <button type="submit" class="btn btn-primary btn-lg" style="background-color:#999900;" autofocus>確認画面へ</button>
               </div>
-              {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-              {% endfor %}
               {{ formset.management_form }}
               <div>
               <br>
