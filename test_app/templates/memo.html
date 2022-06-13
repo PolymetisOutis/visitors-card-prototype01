@@ -1,0 +1,30 @@
+
+         
+          {% load widget_tweaks %}
+          {% for field in formset %}
+            <div class="col" style="padding: 0; padding-left: 12px;">
+                 <div class="input-group">
+                   <div class="input-group-prepend">
+                     <div class="theme-label-contact-edit form-control" for="id_contact-0-interviewer">担当者</div>
+                   </div>
+                   {% render_field  field.interviewer  class="form-control" style="width: 6rem;" %}
+                   {{ formset.0.interviewer }}
+                 </div>
+             </div>
+             <div class="col" style="padding: 0; padding-right: 12px;">
+                 <div class="input-group">
+                     <div class="input-group-prepend">
+                     <div class="theme-label-time-contact-edit form-control" for="id_contact-0-time">退室時刻</div>
+                     </div>
+                     {% render_field  field.time  class="form-control" %}
+                     {{ formset.0.time }}
+                 </div>
+             </div>
+             <div class="input-group">
+                 <div class="input-group-prepend">
+                 <div class="theme-label-textarea-contact-edit form-control" rows="5" for="id_contact-0-contents">内容</div>
+                 </div>
+                 {% render_field  field.contents  class="form-control" %}
+                 {{ formset.0.contents }}
+             </div>
+          {% endfor %}

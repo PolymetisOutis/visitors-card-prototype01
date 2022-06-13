@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
-{% block head %}{% endblock %}  
+{% block head %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock %}  
 {% block title%}対応状況一覧{% endblock %}
 
+    {% block header %}
+    <div class="row">
+    <div class="col-10">
+    <h1>コンタクト一覧</h1>
+    </div>
+    <div class="col-2">
+    <form class="form-inline my-2 my-lg-0 ml-auto">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    </div>
+    </div>
+    {% endblock %}
 {% block content %}
   <div class="container-fluid-list">
     <div class="row">
@@ -16,12 +33,10 @@
             <th scope="col" width="20%">ご用件</th>
             <th scope="col" width="10%">対応担当者</th>
             <th scope="col" width="16%">内容</th>
-            <th scope="col" width="3%"></th>
+            <th scope="col" width="3%">label</th>
+            <th scope="col" width="5%">操作</td>
             <th scope="col" width="6%">操作</td>
-            <th scope="col" width="6%">操作</td>
-            <th scope="col" width="6%">操作</td>
-            <th scope="col" width="6%">操作</td>
-            <th scope="col" width="6%">操作</td>
+            {% comment %} <th scope="col" width="6%">操作</td> {% endcomment %}
           </tr>
         </thead>
         {% for visitor in visitors %}
@@ -49,32 +64,54 @@
             <td>&#10060;</td>
             {% endif %}
             <td>
-              <button class="favorite styled" type="button" onclick="location.href='{% url 'test_app:update_visitors' visitor.pk %}'">編集1</button>
+              {% if not visitor.contact.pk %}
+              <button class="btn btn-success" type="button" onclick="location.href='{% url 'test_app:update_visitors' visitor.pk %}'">編集　</button>
+              {% else %}
+              <div class="dropdown" id="target">
+                <button class="btn btn-success dropdown-toggle"
+                        type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  編集
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  {% if visitor.contact.pk %}
+                  <a class="dropdown-item" href="{% url 'test_app:update_contact' visitor.contact.pk visitor.pk %}">コンタクト編集</a>
+                  {% endif %}
+                  <a class="dropdown-item" href="{% url 'test_app:update_visitors' visitor.pk %}">来訪情報編集</a>
+                  {% if visitor.contact.pk %}
+                  <a class="dropdown-item" href="{% url 'test_app:update_allpost' visitor.pk %}">一括編集</a>
+                  {% endif %}
+                </div>
+              </div>
+              {% endif %}
             </td>
-            {% if visitor.contact.pk %}
             <td>
-              <button class="favorite styled" type="button" onclick="location.href='{% url 'test_app:update_contact' visitor.contact.pk visitor.pk %}'">編集2</button>
+              {% if not visitor.contact.pk %}
+              <button class="btn btn-success" type="button" onclick="location.href='{% url 'test_app:history' %}'">削除　</button>
+              {% else %}
+              <div class="dropdown" id="target">
+                <button class="btn btn-success dropdown-toggle"
+                        type="button" id="dropdownMenu1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                  削除
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  {% if visitor.contact.pk %}
+                  <a class="dropdown-item" href="{% url 'test_app:history' %}">コンタクト削除</a>
+                  {% endif %}
+                  <a class="dropdown-item" href="{% url 'test_app:history' %}">一括削除</a>
+                </div>
+              </div>
+              {% endif %}
             </td>
-            {% else %}
-            <td></td>
-            {% endif %}
-            {% if visitor.contact.pk %}
-            <td>
-              <button class="favorite styled" type="button" onclick="location.href='{% url 'test_app:update_allpost' visitor.pk %}'">編集3</button>
-            </td>
-            {% else %}
-            <td></td>
-            {% endif %}
-            <td>
-              <button class="favorite styled" type="button" onclick="location.href='#'">削除1</button>
-            </td>
-            <td>
+            {% comment %} <td>
               <button class="favorite styled" type="button" onclick="location.href='#'">削除2</button>
-            </td>
+            </td> {% endcomment %}
           </tr>
         </tbody>
         {% endfor %}
       </table>
+      
     </div>
   </div>
   <script>
@@ -85,7 +122,6 @@
      
       //クリックイベント
       .click(function(e) {
-     
         //e.targetはクリックした要素自体、それがa要素以外であれば
         if(!$(e.target).is('a' && 'button')){
          

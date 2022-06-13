@@ -144,6 +144,10 @@ background-color: #ddd; /* 視覚化のための背景色 */
                 inset 2px 2px 3px rgba(0, 0, 0, .6);
 }
 
+.hover-style:hover {
+    background-color: #64dc80;
+}
+
 .left-column-contact {
 
     float: left;

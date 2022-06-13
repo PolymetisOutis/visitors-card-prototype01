@@ -14,7 +14,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
-  <a class="navbar-brand" href="#">訪問者管理システム</a>
+  <a class="navbar-brand" href="{% url 'test_app:history' %}">訪問者管理システム</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,13 +23,10 @@
     <div class="navbar-right">
     <ul class="nav navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'test_app:history' %}">コンタクト一覧</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'test_app:welcome' %}">来訪者カード</a>
       </li>
     </ul>
     </div>
@@ -37,23 +34,25 @@
     <div class="collapse navbar-collapse justify-content-end">
     <ul class="nav navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">統計</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">管理</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link">　</a>
       </li>
     </ul>
     </div>
 
-    <form class="form-inline my-2 my-lg-0 ml-auto">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>
+  <div class="container-fluid-list">
+    <div class="row">
+    {% block header %}
+    {% endblock %}
+    </div>
+  </div>
 
 {% block content %}
 {% endblock %}

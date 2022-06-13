@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block head %}{% endblock %}  
 {% block title%}対応状況詳細{% endblock %}
+    {% block header %}
+    <h1 style="text-align: center;">詳細</h1>
+    {% endblock %}
 
 {% block content %}
     <div class="container-fluid">
@@ -156,6 +159,15 @@
             </div>
         </div>
 
+            <div>
+            <br>
+            </div>
+        {% comment %} <button type="button" class="btn btn-primary btn-sm" style="background-color:#006400;" onclick="location.href='{% url 'test_app:edit_contact' %}'"> {% endcomment %}
+            <button type="button" class="btn btn-sm col-3 btn-outline-success" onclick="location.href='{% url 'test_app:update_visitors' visitor.pk %}'">
+            来訪情報編集
+            </button>
+
+
       <div class="row">
 
 
@@ -191,19 +203,19 @@
 
         <div class="row" style="padding-right: 1px; padding-left: 24px;">
         {% comment %} <button type="button" class="btn btn-primary btn-sm" style="background-color:#006400;" onclick="location.href='{% url 'test_app:edit_contact' %}'"> {% endcomment %}
-        <button type="button" class="btn btn-primary btn-sm col" style="background-color:#28a745; padding-left: 12px;" onclick="location.href='#'">
+        <button type="button" class="btn btn-sm col btn-outline-success" style="padding-left: 12px;" onclick="location.href='{% url 'test_app:update_contact' visitor.contact.pk visitor.pk %}'">
             コンタクト編集
         </button>
         {% comment %} <button type="button" class="btn btn-primary btn-sm" style="background-color:#006400;" onclick="location.href='{% url 'test_app:edit_contact' %}'"> {% endcomment %}
-            <button type="button" class="btn btn-primary btn-sm col" style="background-color:#28a745;" onclick="location.href='#'">
-            来訪/コンタクト編集
+            <button type="button" class="btn btn-sm col btn-outline-success" onclick="location.href='{% url 'test_app:update_allpost' visitor.pk %}'">
+            一括編集
         </button>
         {% comment %} <button type="button" class="btn btn-primary btn-sm" style="background-color:#006400;" onclick="location.href='{% url 'test_app:edit_contact' %}'"> {% endcomment %}
-            <button type="button" class="btn btn-primary btn-sm col" style="background-color:#28a745;" onclick="location.href='#'">
+            <button type="button" class="btn btn-sm col btn-outline-success" onclick="location.href='#'">
             コンタクト削除
         </button>
         {% comment %} <button type="button" class="btn btn-primary btn-sm" style="background-color:#006400;" onclick="location.href='{% url 'test_app:edit_contact' %}'"> {% endcomment %}
-            <button type="button" class="btn btn-primary btn-sm col" style="background-color:#28a745; padding-right: 12px;" onclick="location.href='#'">
+            <button type="button" class="btn btn-sm col btn-outline-success" style="padding-right: 12px;" onclick="location.href='#'">
             来訪/コンタクト削除
         </button>
         </div>
@@ -242,7 +254,9 @@
             </div>
                 
             <div class="row" style="padding-right: 1px; padding-left: 24px;">
-            <button type="submit" class="btn btn-primary btn-lg" style="background-color:#999900;" autofocus>確認画面へ</button>
+            <button type="submit" class="btn btn-lg col btn-outline-success">
+            確認画面へ
+            </button>
             </div>
 
             <div>
