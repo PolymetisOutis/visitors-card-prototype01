@@ -24,6 +24,7 @@
         <h3 class="h3-title">来訪日時</h3>
         {% comment %} <div class="box"> {% endcomment %}
           <div class="col" style="padding: 0; padding-left: 12px;">
+          <div class="name-sp">
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="theme-label form-control">来訪日<span style="color: red;">*</span></div>
@@ -31,13 +32,16 @@
               <input name="date" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
             </div>
           </div>
+          </div>
           <div class="col" style="padding: 0; padding-right: 12px;">
+          <div class="temp-sp">
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="theme-label-time form-control">入室時刻<span style="color: red;">*</span></div>
               </div>
               <input name="time" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
             </div>
+          </div>
           </div>
           {% comment %} </div> {% endcomment %}
           <h3 class="h3-title">来訪者</h3>
@@ -57,6 +61,7 @@
           </div>
           </div>
           </div>
+
           <div class="col-4" style="padding: 0; padding-right: 12px;">
           <div class="temp-sp">
             <div class="input-group">
@@ -95,12 +100,14 @@
           </div>
 
           <div class="col-4" style="padding: 0; padding-right: 12px;">
+          <div class="temp-sp">
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
               </div>
               <input name="accompany1_temp" type="text" class="form-control accompany1_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
             </div>
+          </div>
           </div>
           {% comment %} </div> {% endcomment %}
         </div>
@@ -122,6 +129,7 @@
           </div>
 
           <div class="col-4" style="padding: 0; padding-right: 12px;">
+          <div class="temp-sp">
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
@@ -129,6 +137,8 @@
               <input name="accompany2_temp" type="text" class="form-control accompany2_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
             </div>
           </div>
+          </div>
+
           </div>
         </div>
           {% comment %} </div> {% endcomment %}
@@ -148,6 +158,7 @@
           </div>
 
           <div class="col-4" style="padding: 0; padding-right: 12px;">
+          <div class="temp-sp">
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
@@ -155,6 +166,8 @@
               <input name="accompany3_temp" type="text" class="form-control accompany3_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
             </div>
           </div>
+          </div>
+
           </div>
         </div>
           {% comment %} </div> {% endcomment %}
@@ -197,7 +210,9 @@
           </div>
 
           <div class="row" style="padding-right: 1px; padding-left: 24px;">
+          <div class="confirm-sp row">
           <button type="submit" class="btn btn-primary btn-lg" style="background-color:rgb(135, 137, 6);" autofocus>確認画面へ</button>
+          </div>
           </div>
         </div>
       </div>

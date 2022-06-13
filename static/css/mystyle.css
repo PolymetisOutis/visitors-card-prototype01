@@ -201,18 +201,37 @@ background-color: white; /* 視覚化のための背景色 */
     margin-left: auto;
     max-width: 70%; 
   }
-  html {
-      font-size: 50%;
-  }
-  .img-sp {
+
+html {
+    font-size: 50%;
+}
+
+.img-sp {
     width: 60px;
     height: 60px;
     text-align: center;
-  }
-  .name-sp {
-    margin-left: -6px;
-  }
-  .temp-sp {
+}
+
+.name-sp {
+    margin-left: -6px;  
+}
+
+.temp-sp {
     margin-right: -6px;
-  }
-  }
+}
+
+.right-column {
+
+    float: right;
+    width: 53.4%; /* 要素の幅を50%に定義 */
+    background-color: #ddd; /* 視覚化のための背景色 */
+
+}
+
+.confirm-sp {
+    margin-left: -8px;
+    margin-right: 0px;
+}
+
+    
+}
