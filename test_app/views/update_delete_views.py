@@ -8,6 +8,7 @@ from django import forms
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.db.models import Q
+from django.urls import reverse
 
 # Create your views here.
 
@@ -122,6 +123,9 @@ class ContactDelete(DeleteView):
     template_name = 'test_app/delete_contact.html'
     success_url = reverse_lazy('test_app:history')
 
+    def get_success_url(self):
+        return reverse('test_app:history', kwargs={'page': '1'})
+
     def get(self, request, *args, **kwargs):
         visitor = Visitors.objects.get(contact = self.kwargs['pk'])
         contact = Contact.objects.get(id=self.kwargs['pk'])
@@ -167,6 +171,9 @@ class VisitorsDelete(DeleteView):
     template_name = 'test_app/delete_contact_all.html'
     success_url = reverse_lazy('test_app:history')
 
+    def get_success_url(self):
+        return reverse('test_app:history', kwargs={'page': '1'})
+    
     def delete(self, request, *args, **kwargs):
         result = super().delete(request, *args, **kwargs)
         # visitor = Visitors.objects.get(contact = self.kwargs['pk'])

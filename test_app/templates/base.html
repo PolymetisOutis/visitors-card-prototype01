@@ -8,13 +8,28 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  {% comment %} history.htmlにおいて、テーブルの行選択の中にプルダウン設置有効化のために以下配置 {% endcomment %}
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  {% comment %} 来訪者カード等において、日付・時刻の入力フォームのデザインをNarito先生の教えを反映させるため下記配置 {% endcomment %}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      {% comment %} 日付の日本語表記の為配置 {% endcomment %}
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+      {% comment %} 時刻のウィジェット適用の為以下配置 {% endcomment %}
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/timedropper/1.0/timedropper.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/timedropper/1.0/timedropper.min.js"></script>
+  
+  
   {% block head %}{% endblock %}  
   <title>{% block title%}{% endblock %}</title>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
-  <a class="navbar-brand" href="{% url 'test_app:history' %}">訪問者管理システム</a>
+  <a class="navbar-brand" href="{% url 'test_app:history' page=1 %}">訪問者管理システム</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,7 +38,7 @@
     <div class="navbar-right">
     <ul class="nav navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'test_app:history' %}">コンタクト一覧</a>
+        <a class="nav-link" href="{% url 'test_app:history' page=1 %}">コンタクト一覧</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'test_app:welcome' %}">来訪者カード</a>

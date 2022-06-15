@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 {% block head %}
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% endblock %}  
 {% block title%}対応状況一覧{% endblock %}
 
@@ -124,6 +121,39 @@
       <div>
         <br>
       </div>
+
+      <!-- Pagination -->
+      <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item {% if not visitors.has_previous %} disabled {% endif %}">
+                <a class="page-link" href="{% if visitors.has_previous %} {% url 'test_app:history' visitors.previous_page_number %}{% endif %} ">Previous</a>
+            </li>
+
+            {% if visitors.number|add:'-1' > 1 %}
+                <li class="page-item disabled"><a class="page-link">&hellip;</a></li>
+            {% endif %}
+
+            {% for i in visitors.paginator.page_range %}
+                {% if visitors.number == i %}
+                    <li class="active page-item disabled"><a class="page-link" href="#">{{ i }}</a></li>
+                {% elif i > visitors.number|add:'-2' and i < visitors.number|add:'2' %}
+                    <li class="page-item"><a class="page-link" href="{% url 'test_app:history' i %}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if visitors.paginator.num_pages > visitors.number|add:'1' %}
+                <li class="page-item disabled"><a class="page-link" href="#">&hellip;</a></li>
+            {% endif %}
+
+            <li class="page-item {% if not visitors.has_next %} disabled {% endif %}">
+                <a class="page-link" href="{% if visitors.has_next %} {% url 'test_app:history' visitors.next_page_number %} {% endif %}">Next</a>
+            </li>
+        </ul>
+      </nav>  
+      <!-- END Pagination -->
+
+
+
     </div>
   </div>
   <script>

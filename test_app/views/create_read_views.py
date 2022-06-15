@@ -8,6 +8,8 @@ from django import forms
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage
+
 
 # Create your views here.
 
@@ -23,6 +25,9 @@ def welcome(request):
         'msg': 'ようこそ！！'
     }
     return render(request, 'test_app/entry_form/welcome.html', context)
+
+def welcome_widget(request):
+    return render(request, 'test_app/welcome_widget.html')
 
 
 def confirm(request):
@@ -70,12 +75,16 @@ def sent(request):
     return render(request, 'test_app/lazy/thankyou.html')
 
 
-def history(request):
-    visitors = Visitors.objects.all()
+def history(request, page=1):
+    visitors = Visitors.objects.all().order_by('-id')
     contact_objects = Contact.objects.all()
     interviewer = Member.objects.all()
     posts = Post.objects.all()
 
+
+    """
+    検索機能　SearchForm
+    """
     if request.method == 'POST':
         print('history POST method')
         keyword = request.POST.get('search_form')
@@ -159,13 +168,28 @@ def history(request):
                 print(test_visitor2)
         visitors = visitors.distinct()
         print(visitors)
+    """
+    検索機能ここまで
+    """
+    """
+    ページネーション
+    """
+    paginator = Paginator(visitors, 6)
 
-    visitor2 = Visitors.objects.get(id=2)
+    try:
+        visitors = paginator.page(page)
+    except EmptyPage:
+        visitors = paginator.page(paginator.num_pages)
+
+    # visitor2 = Visitors.objects.get(id=2)
     # print(dir(visitor2.contact))
     context = {
         'visitors': visitors,
     }
-    # テスト
+
+    """
+    統計情報に向けたテスト
+    """
     visitor_type = Visitors.objects.all().values_list('visitor_name', flat=True).order_by('visitor_name').distinct()
     print(visitor_type)
     visitor_type1 = visitor_type.get(visitor_name='小川')
@@ -214,14 +238,20 @@ def confirm_contact(request, pk):
 
 def sent_contact(request, pk):
     visitor = Visitors.objects.get(pk=pk)
+    """
+    もしPOSTメソッドならば
+    """
     if request.method == 'POST':
-        contact = visitor
+        contact = visitor # これ要らない気がすると思って一度消したけど、最後のcreate文で代入してデータベースに登録している。
         interviewer_post_name = request.POST.get('interviewer')
         print(interviewer_post_name)
         target = '/'
-        idx = interviewer_post_name.find(target)
-        interviewer_name = interviewer_post_name[idx+2:]
+        idx = interviewer_post_name.find(target) # target:'/'のindex位置を取得
+        interviewer_name = interviewer_post_name[idx+2:] # target:'/'の位置からプラス2した位置から文字列取得
         print(interviewer_name)
+        """
+        もし名前を何も選ばずに担当者が登録したら
+        """
         if interviewer_post_name == "None":
             interviewer = None
         else:
@@ -229,14 +259,22 @@ def sent_contact(request, pk):
             visitor.is_contacted = True
             visitor.save()
         time = request.POST.get('time')
+        """
+        もし時刻を何も入れずに担当者が登録したら
+        """
         if time == "":
             time = '00:00'
         contents = request.POST.get('contents')
+        
         try:
-            contact = Contact.objects.get(contact_id=pk)
+            contact = Contact.objects.get(contact_id=pk) # VisitorsのidとはContactのcontactのidとなる。
+                                                         # Visitorsのidがpkの場合のContactのデータを取得している。
+                                                         # try文なので、エラー、即ち、is_contacted=Falseで尚且つ、
+                                                         # Contactのデータが無ければexcept文が実行される。
             contact.interviewer = interviewer
             contact.time = time
             contact.contents = contents
+            contact.save() # データベースへの反映.save()が抜けていたので付け足した。
         except:
             Contact.objects.create(contact=contact, interviewer=interviewer, time=time, contents=contents)
 
