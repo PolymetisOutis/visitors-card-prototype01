@@ -8,9 +8,39 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  {% comment %} <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> {% endcomment %}
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
 
+  {% comment %} 来訪者カード等において、日付・時刻の入力フォームのデザインをNarito先生の教えを反映させるため下記配置 {% endcomment %}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      {% comment %} 日付の日本語表記の為配置 {% endcomment %}
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+      {% comment %} StackOverflow由来の配置　datepickerが適用されなかった為 {% endcomment %}
+      {% comment %} <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script> {% endcomment %}
+  {% comment %} datepicker元サイトから借用 {% endcomment %}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+      {% comment %} 時刻のウィジェット適用の為以下配置 {% endcomment %}
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/timedropper/1.0/timedropper.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timedropper/1.0/timedropper.min.js"></script>
+
+  <script>
+    $(function () {
+      // 日付は、年-月-日 の形式でお願いする。
+      let dateFormat = 'yy-mm-dd';
+      $('#id_date').datepicker({
+          dateFormat: dateFormat
+      });
+    });
+  </script>
 </head>
+
+
+
 <body>
   <div class="container-fluid">
     <form action="{% url 'test_app:confirm' %}" method="post">
@@ -29,7 +59,16 @@
               <div class="input-group-prepend">
                 <div class="theme-label form-control">来訪日<span style="color: red;">*</span></div>
               </div>
-              <input name="date" type="date" id="date" value=""  class="form-control"/>
+              {% comment %} {{ form.date }} {% endcomment %}
+              <input name="date" id="id_date" value=""  class="form-control"/>
+              {% comment %} <div class="form-group">
+                <div class="input-group date" id="datetimepicker1">
+                            <input type='text' id="id_date" runat="server" name="fecha_nac" class="form-control input_margin" readonly="true" placeholder="Eliga la fecha"/>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                 </div>    
+              </div>  {% endcomment %}
+              {% comment %} <input name="date" id="id_entry_date" value=""  class="form-control"/> {% endcomment %}
               {% comment %} <input name="date" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required> {% endcomment %}
             </div>
           </div>
@@ -40,7 +79,9 @@
               <div class="input-group-prepend">
                 <div class="theme-label-time form-control">入室時刻<span style="color: red;">*</span></div>
               </div>
-              <input name="time" type="time" id="time" class="form-control" value="">
+              {% comment %} {{ form.time }} {% endcomment %}
+              <input name="time" id="id_time" class="form-control" value="">
+              {% comment %} <input name="time" id="id_entry_time" class="form-control" value=""> {% endcomment %}
               {% comment %} <input name="time" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required> {% endcomment %}
             </div>
           </div>
@@ -70,7 +111,32 @@
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
               </div>
-              <input name="temperature" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+              {% comment %} <input name="temperature" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required> {% endcomment %}
+              <select name="temperature" class="form-control">
+                {% comment %} 「発熱とは体温が37.5℃以上を呈した状態をいい、高熱とは体温が38.0℃以上を呈した状態をいう」とされている。※厚生労働省 {% endcomment %}
+                {% comment %} 平熱の平均は36.89度とされている {% endcomment %}
+                <option value="35.5">35.5</option>
+                <option value="35.6">35.6</option>
+                <option value="35.7">35.7</option>
+                <option value="35.8">35.8</option>
+                <option value="36.0">36.0</option>
+                <option value="36.1">36.1</option>
+                <option value="36.2">36.2</option>
+                <option value="36.3">36.3</option>
+                <option value="36.4">36.4</option>
+                <option value="36.5">36.5</option>
+                <option value="36.6">36.6</option>
+                <option value="36.7">36.7</option>
+                <option value="36.8" selected>36.8</option>
+                <option value="36.9">36.9</option>
+                <option value="37.0">37.0</option>
+                <option value="37.1">37.1</option>
+                <option value="37.2">37.2</option>
+                <option value="37.3">37.3</option>
+                <option value="37.4">37.4</option>
+                <option value="37.5">その他</option>
+
+              </select>
             </div>
           </div>
           </div>
@@ -107,7 +173,32 @@
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
               </div>
-              <input name="accompany1_temp" type="text" class="form-control accompany1_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
+              {% comment %} <input name="accompany1_temp" type="text" class="form-control accompany1_temp" placeholder="" aria-label="" aria-describedby="basic-addon1"> {% endcomment %}
+              <select name="accompany1_temp" class="form-control">
+                {% comment %} 「発熱とは体温が37.5℃以上を呈した状態をいい、高熱とは体温が38.0℃以上を呈した状態をいう」とされている。※厚生労働省 {% endcomment %}
+                {% comment %} 平熱の平均は36.89度とされている {% endcomment %}
+                <option value="35.5">35.5</option>
+                <option value="35.6">35.6</option>
+                <option value="35.7">35.7</option>
+                <option value="35.8">35.8</option>
+                <option value="36.0">36.0</option>
+                <option value="36.1">36.1</option>
+                <option value="36.2">36.2</option>
+                <option value="36.3">36.3</option>
+                <option value="36.4">36.4</option>
+                <option value="36.5">36.5</option>
+                <option value="36.6">36.6</option>
+                <option value="36.7">36.7</option>
+                <option value="36.8" selected>36.8</option>
+                <option value="36.9">36.9</option>
+                <option value="37.0">37.0</option>
+                <option value="37.1">37.1</option>
+                <option value="37.2">37.2</option>
+                <option value="37.3">37.3</option>
+                <option value="37.4">37.4</option>
+                <option value="37.5">その他</option>
+
+              </select>
             </div>
           </div>
           </div>
@@ -136,7 +227,32 @@
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
               </div>
-              <input name="accompany2_temp" type="text" class="form-control accompany2_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
+              {% comment %} <input name="accompany2_temp" type="text" class="form-control accompany2_temp" placeholder="" aria-label="" aria-describedby="basic-addon1"> {% endcomment %}
+              <select name="accompany2_temp" class="form-control">
+                {% comment %} 「発熱とは体温が37.5℃以上を呈した状態をいい、高熱とは体温が38.0℃以上を呈した状態をいう」とされている。※厚生労働省 {% endcomment %}
+                {% comment %} 平熱の平均は36.89度とされている {% endcomment %}
+                <option value="35.5">35.5</option>
+                <option value="35.6">35.6</option>
+                <option value="35.7">35.7</option>
+                <option value="35.8">35.8</option>
+                <option value="36.0">36.0</option>
+                <option value="36.1">36.1</option>
+                <option value="36.2">36.2</option>
+                <option value="36.3">36.3</option>
+                <option value="36.4">36.4</option>
+                <option value="36.5">36.5</option>
+                <option value="36.6">36.6</option>
+                <option value="36.7">36.7</option>
+                <option value="36.8" selected>36.8</option>
+                <option value="36.9">36.9</option>
+                <option value="37.0">37.0</option>
+                <option value="37.1">37.1</option>
+                <option value="37.2">37.2</option>
+                <option value="37.3">37.3</option>
+                <option value="37.4">37.4</option>
+                <option value="37.5">その他</option>
+
+              </select>
             </div>
           </div>
           </div>
@@ -165,7 +281,32 @@
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
               </div>
-              <input name="accompany3_temp" type="text" class="form-control accompany3_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
+              {% comment %} <input name="accompany3_temp" type="text" class="form-control accompany3_temp" placeholder="" aria-label="" aria-describedby="basic-addon1"> {% endcomment %}
+              <select name="accompany3_temp" class="form-control">
+                {% comment %} 「発熱とは体温が37.5℃以上を呈した状態をいい、高熱とは体温が38.0℃以上を呈した状態をいう」とされている。※厚生労働省 {% endcomment %}
+                {% comment %} 平熱の平均は36.89度とされている {% endcomment %}
+                <option value="35.5">35.5</option>
+                <option value="35.6">35.6</option>
+                <option value="35.7">35.7</option>
+                <option value="35.8">35.8</option>
+                <option value="36.0">36.0</option>
+                <option value="36.1">36.1</option>
+                <option value="36.2">36.2</option>
+                <option value="36.3">36.3</option>
+                <option value="36.4">36.4</option>
+                <option value="36.5">36.5</option>
+                <option value="36.6">36.6</option>
+                <option value="36.7">36.7</option>
+                <option value="36.8" selected>36.8</option>
+                <option value="36.9">36.9</option>
+                <option value="37.0">37.0</option>
+                <option value="37.1">37.1</option>
+                <option value="37.2">37.2</option>
+                <option value="37.3">37.3</option>
+                <option value="37.4">37.4</option>
+                <option value="37.5">その他</option>
+
+              </select>
             </div>
           </div>
           </div>
@@ -219,6 +360,23 @@
         </div>
       </div>
     <script>
+      $(function () {
+        // 日付は、年-月-日 の形式でお願いする。
+        let dateFormat = 'yyyy-mm-dd';
+        $('#id_date').datepicker({
+            dateFormat: dateFormat
+        });
+      });
+      
+      
+      $(function () {
+        // timedropper
+        $("#id_time").timeDropper({
+            format: "H:mm",
+            setCurrentTime: true,
+        });
+      });
+
       $(".extraction").change(function() {
         var extraction_val = $(".extraction").val();
         if(extraction_val == "0") {

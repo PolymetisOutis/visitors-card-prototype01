@@ -7,7 +7,7 @@ urlpatterns = [
     path('index/', views.index, name='index'),
     # 入力フォーム
     path('welcome/', views.welcome, name='welcome'),
-    path('welcome_widget/', views.welcome, name='welcome_widget'),
+    path('welcome_widget/', views.welcome_widget, name='welcome_widget'),
     path('confirm/', views.confirm, name='confirm'),
     path('thankyou/', views.sent, name='sent'),
     # 情報閲覧管理者画面

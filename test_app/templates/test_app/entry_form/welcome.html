@@ -70,7 +70,32 @@
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
               </div>
-              <input name="temperature" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+              {% comment %} <input name="temperature" type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1" required> {% endcomment %}
+              <select name="temperature" class="form-control">
+                {% comment %} 「発熱とは体温が37.5℃以上を呈した状態をいい、高熱とは体温が38.0℃以上を呈した状態をいう」とされている。※厚生労働省 {% endcomment %}
+                {% comment %} 平熱の平均は36.89度とされている {% endcomment %}
+                <option value="35.5">35.5</option>
+                <option value="35.6">35.6</option>
+                <option value="35.7">35.7</option>
+                <option value="35.8">35.8</option>
+                <option value="36.0">36.0</option>
+                <option value="36.1">36.1</option>
+                <option value="36.2">36.2</option>
+                <option value="36.3">36.3</option>
+                <option value="36.4">36.4</option>
+                <option value="36.5">36.5</option>
+                <option value="36.6">36.6</option>
+                <option value="36.7">36.7</option>
+                <option value="36.8" selected>36.8</option>
+                <option value="36.9">36.9</option>
+                <option value="37.0">37.0</option>
+                <option value="37.1">37.1</option>
+                <option value="37.2">37.2</option>
+                <option value="37.3">37.3</option>
+                <option value="37.4">37.4</option>
+                <option value="その他">その他</option>
+
+              </select>
             </div>
           </div>
           </div>
@@ -107,7 +132,32 @@
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
               </div>
-              <input name="accompany1_temp" type="text" class="form-control accompany1_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
+              {% comment %} <input name="accompany1_temp" type="text" class="form-control accompany1_temp" placeholder="" aria-label="" aria-describedby="basic-addon1"> {% endcomment %}
+              <select name="accompany1_temp" class="form-control">
+                {% comment %} 「発熱とは体温が37.5℃以上を呈した状態をいい、高熱とは体温が38.0℃以上を呈した状態をいう」とされている。※厚生労働省 {% endcomment %}
+                {% comment %} 平熱の平均は36.89度とされている {% endcomment %}
+                <option value="35.5">35.5</option>
+                <option value="35.6">35.6</option>
+                <option value="35.7">35.7</option>
+                <option value="35.8">35.8</option>
+                <option value="36.0">36.0</option>
+                <option value="36.1">36.1</option>
+                <option value="36.2">36.2</option>
+                <option value="36.3">36.3</option>
+                <option value="36.4">36.4</option>
+                <option value="36.5">36.5</option>
+                <option value="36.6">36.6</option>
+                <option value="36.7">36.7</option>
+                <option value="36.8" selected>36.8</option>
+                <option value="36.9">36.9</option>
+                <option value="37.0">37.0</option>
+                <option value="37.1">37.1</option>
+                <option value="37.2">37.2</option>
+                <option value="37.3">37.3</option>
+                <option value="37.4">37.4</option>
+                <option value="その他">その他</option>
+
+              </select>
             </div>
           </div>
           </div>
@@ -136,7 +186,32 @@
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
               </div>
-              <input name="accompany2_temp" type="text" class="form-control accompany2_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
+              {% comment %} <input name="accompany2_temp" type="text" class="form-control accompany2_temp" placeholder="" aria-label="" aria-describedby="basic-addon1"> {% endcomment %}
+              <select name="accompany2_temp" class="form-control">
+                {% comment %} 「発熱とは体温が37.5℃以上を呈した状態をいい、高熱とは体温が38.0℃以上を呈した状態をいう」とされている。※厚生労働省 {% endcomment %}
+                {% comment %} 平熱の平均は36.89度とされている {% endcomment %}
+                <option value="35.5">35.5</option>
+                <option value="35.6">35.6</option>
+                <option value="35.7">35.7</option>
+                <option value="35.8">35.8</option>
+                <option value="36.0">36.0</option>
+                <option value="36.1">36.1</option>
+                <option value="36.2">36.2</option>
+                <option value="36.3">36.3</option>
+                <option value="36.4">36.4</option>
+                <option value="36.5">36.5</option>
+                <option value="36.6">36.6</option>
+                <option value="36.7">36.7</option>
+                <option value="36.8" selected>36.8</option>
+                <option value="36.9">36.9</option>
+                <option value="37.0">37.0</option>
+                <option value="37.1">37.1</option>
+                <option value="37.2">37.2</option>
+                <option value="37.3">37.3</option>
+                <option value="37.4">37.4</option>
+                <option value="その他">その他</option>
+
+              </select>
             </div>
           </div>
           </div>
@@ -165,7 +240,32 @@
               <div class="input-group-prepend">
                 <div class="theme-label-tempcheck form-control">検温<span style="color: red;">*</span></div>
               </div>
-              <input name="accompany3_temp" type="text" class="form-control accompany3_temp" placeholder="" aria-label="" aria-describedby="basic-addon1">
+              {% comment %} <input name="accompany3_temp" type="text" class="form-control accompany3_temp" placeholder="" aria-label="" aria-describedby="basic-addon1"> {% endcomment %}
+              <select name="accompany3_temp" class="form-control">
+                {% comment %} 「発熱とは体温が37.5℃以上を呈した状態をいい、高熱とは体温が38.0℃以上を呈した状態をいう」とされている。※厚生労働省 {% endcomment %}
+                {% comment %} 平熱の平均は36.89度とされている {% endcomment %}
+                <option value="35.5">35.5</option>
+                <option value="35.6">35.6</option>
+                <option value="35.7">35.7</option>
+                <option value="35.8">35.8</option>
+                <option value="36.0">36.0</option>
+                <option value="36.1">36.1</option>
+                <option value="36.2">36.2</option>
+                <option value="36.3">36.3</option>
+                <option value="36.4">36.4</option>
+                <option value="36.5">36.5</option>
+                <option value="36.6">36.6</option>
+                <option value="36.7">36.7</option>
+                <option value="36.8" selected>36.8</option>
+                <option value="36.9">36.9</option>
+                <option value="37.0">37.0</option>
+                <option value="37.1">37.1</option>
+                <option value="37.2">37.2</option>
+                <option value="37.3">37.3</option>
+                <option value="37.4">37.4</option>
+                <option value="その他">その他</option>
+
+              </select>
             </div>
           </div>
           </div>

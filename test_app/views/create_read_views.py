@@ -27,7 +27,13 @@ def welcome(request):
     return render(request, 'test_app/entry_form/welcome.html', context)
 
 def welcome_widget(request):
-    return render(request, 'test_app/welcome_widget.html')
+    form = VisitorsForm()
+    print(form)
+    print(dir(form))
+    context = {
+        'form': form,
+    }
+    return render(request, 'test_app/entry_form/welcome_widget.html', context)
 
 
 def confirm(request):
