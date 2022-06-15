@@ -12,8 +12,9 @@
     <h1>コンタクト一覧</h1>
     </div>
     <div class="col-2">
-    <form class="form-inline my-2 my-lg-0 ml-auto">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-lg-0 ml-auto" method="post">
+      {% csrf_token %}
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search_form">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
     </div>
@@ -22,6 +23,14 @@
 {% block content %}
   <div class="container-fluid-list">
     <div class="row">
+       <!-- メッセージ表示 -->
+       {% if messages %}
+       {% for message in messages %}
+       <div class="alert alert-success" role="alert">
+          {{ message }}
+       </div>
+       {% endfor %}
+       {% endif %}
   
     <table class="table table-bordered border-success table-hover">
         <thead class="table-success">
@@ -31,9 +40,9 @@
             <th scope="col">会社名</th>
             <th scope="col" width="8%">訪問者氏名</th>
             <th scope="col" width="20%">ご用件</th>
+            <th scope="col" width="3%">label</th>
             <th scope="col" width="10%">対応担当者</th>
             <th scope="col" width="16%">内容</th>
-            <th scope="col" width="3%">label</th>
             <th scope="col" width="5%">操作</td>
             <th scope="col" width="6%">操作</td>
             {% comment %} <th scope="col" width="6%">操作</td> {% endcomment %}
@@ -49,6 +58,11 @@
             <td>{{ visitor.visitor_name }}</td>
             <td>{{ visitor.content | linebreaksbr | truncatechars:30 }}</td>
             {% if visitor.is_contacted %}
+            <td>✅</td>
+            {% else %}
+            <td>&#10060;</td>
+            {% endif %}
+            {% if visitor.is_contacted %}
             <td>{{ visitor.contact.interviewer }}</td>
             {% else %}
             <td></td>
@@ -57,11 +71,6 @@
             <td>{{ visitor.contact.contents | linebreaksbr | truncatechars:30 }}</td>
             {% else %}
             <td></td>
-            {% endif %}
-            {% if visitor.is_contacted %}
-            <td>✅</td>
-            {% else %}
-            <td>&#10060;</td>
             {% endif %}
             <td>
               {% if not visitor.contact.pk %}
@@ -87,7 +96,7 @@
             </td>
             <td>
               {% if not visitor.contact.pk %}
-              <button class="btn btn-success" type="button" onclick="location.href='{% url 'test_app:history' %}'">削除　</button>
+              <button class="btn btn-success" type="button" onclick="location.href='{% url 'test_app:delete_contact_all' visitor.pk %}'">削除　</button>
               {% else %}
               <div class="dropdown" id="target">
                 <button class="btn btn-success dropdown-toggle"
@@ -97,9 +106,9 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                   {% if visitor.contact.pk %}
-                  <a class="dropdown-item" href="{% url 'test_app:history' %}">コンタクト削除</a>
+                  <a class="dropdown-item" href="{% url 'test_app:delete_contact' visitor.contact.pk %}">コンタクト削除</a>
                   {% endif %}
-                  <a class="dropdown-item" href="{% url 'test_app:history' %}">一括削除</a>
+                  <a class="dropdown-item" href="{% url 'test_app:delete_contact_all' visitor.pk %}">一括削除</a>
                 </div>
               </div>
               {% endif %}
@@ -112,6 +121,9 @@
         {% endfor %}
       </table>
       
+      <div>
+        <br>
+      </div>
     </div>
   </div>
   <script>

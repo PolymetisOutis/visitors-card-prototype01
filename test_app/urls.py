@@ -19,4 +19,7 @@ urlpatterns = [
     path('update_contact/<int:pk>/<int:id>/', views.ContactUpdate.as_view(), name='update_contact'),
     # path('update_contact_all/<int:pk>/', views.VisitorsContactUpdateFormSetView.as_view(), name='update_contact_all'),
     path('update_allpost/<int:pk>/', views.update_allpost, name='update_allpost'),
+
+    path('delete_contact/<int:pk>/', views.ContactDelete.as_view(), name='delete_contact'),
+    path('delete_contact_all/<int:pk>/', views.VisitorsDelete.as_view(), name='delete_contact_all'),
 ]

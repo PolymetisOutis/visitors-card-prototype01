@@ -19,7 +19,7 @@
 .theme-label {
     background-color:#999900;
     color:white;
-    width: 6em;
+    width: 5.5em;
 }
   
 .theme-label-time {
@@ -37,7 +37,7 @@
 .theme-label-textarea {
     background-color:#999900;
     color:white;
-    width: 6em;
+    width: 5.5em;
     height: 6.5em;
 }
 
@@ -57,7 +57,7 @@ background-color: #aaa; /* 視覚化のための背景色 */
 .right-column {
 
 float: right;
-width: 55.6%; /* 要素の幅を50%に定義 */
+width: 55.4%; /* 要素の幅を50%に定義 */
 background-color: #ddd; /* 視覚化のための背景色 */
 
 }
@@ -69,7 +69,7 @@ background-color: #ddd; /* 視覚化のための背景色 */
 .theme-label-contact {
     background-color:#28a745;
     color:white;
-    width: 6em;
+    width: 5.5em;
 }
   
 .theme-label-time-contact {
@@ -81,14 +81,14 @@ background-color: #ddd; /* 視覚化のための背景色 */
 .theme-label-textarea-contact {
     background-color:#28a745;
     color:white;
-    width: 6em;
+    width: 5.5em;
     height: 6.5em;
 }
   
 .theme-label-contact-edit {
     background-color:#999900;
     color:white;
-    width: 6em;
+    width: 5.5em;
 }
   
 .theme-label-time-contact-edit {
@@ -100,7 +100,7 @@ background-color: #ddd; /* 視覚化のための背景色 */
 .theme-label-textarea-contact-edit {
     background-color:#999900;
     color:white;
-    width: 6em;
+    width: 5.5em;
     height: 15.8em;
 }
   
@@ -164,6 +164,14 @@ background-color: white; /* 視覚化のための背景色 */
 
 }
 
+.right-column-edit {
+
+    float: right;
+    width: 55.26%; /* 要素の幅を50%に定義 */
+    background-color: white; /* 視覚化のための背景色 */
+    
+}
+    
 
 .theme-label-tempcheck-contact {
     background-color:#28a745;
@@ -185,7 +193,6 @@ background-color: white; /* 視覚化のための背景色 */
 } */
 /* .input-group{
     padding: 0px;
-
 } */
 
 /* 更新画面 */
